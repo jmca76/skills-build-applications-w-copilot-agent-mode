@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startServer = exports.port = exports.app = exports.apiBaseUrl = void 0;
+const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const database_1 = require("./config/database");
 const api_1 = require("./routes/api");
@@ -13,6 +14,7 @@ exports.apiBaseUrl = codespaceName
     : 'http://localhost:8000';
 exports.app = (0, express_1.default)();
 exports.port = Number(process.env.PORT) || 8000;
+exports.app.use((0, cors_1.default)());
 exports.app.use(express_1.default.json());
 exports.app.use('/api', api_1.apiRouter);
 exports.app.get('/api/health', (_request, response) => {
