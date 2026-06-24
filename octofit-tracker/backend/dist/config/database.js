@@ -1,5 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mongoUri = void 0;
+exports.disconnectFromDatabase = exports.connectToDatabase = exports.mongoUri = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
 exports.mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
+const connectToDatabase = async () => mongoose_1.default.connect(exports.mongoUri);
+exports.connectToDatabase = connectToDatabase;
+const disconnectFromDatabase = async () => {
+    await mongoose_1.default.disconnect();
+};
+exports.disconnectFromDatabase = disconnectFromDatabase;
 //# sourceMappingURL=database.js.map

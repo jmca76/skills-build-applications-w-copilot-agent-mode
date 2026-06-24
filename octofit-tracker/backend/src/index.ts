@@ -1,7 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import { apiBaseUrl } from './config/apiUrl';
-import { mongoUri } from './config/database';
+import { connectToDatabase, mongoUri } from './config/database';
 import { apiRouter } from './routes/api';
 
 const app = express();
@@ -21,7 +20,7 @@ app.use((error: unknown, _request: express.Request, response: express.Response, 
 
 const startServer = async (): Promise<void> => {
   try {
-    await mongoose.connect(mongoUri);
+    await connectToDatabase();
     console.log(`MongoDB connected: ${mongoUri}`);
   } catch (error) {
     console.warn('MongoDB connection failed; API will still start.');

@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
 const database_1 = require("../config/database");
 const models_1 = require("../models");
 const users = [
@@ -148,7 +144,7 @@ const workouts = [
 ];
 const seedDatabase = async () => {
     console.log('Seed the octofit_db database with test data');
-    await mongoose_1.default.connect(database_1.mongoUri);
+    await (0, database_1.connectToDatabase)();
     await Promise.all([
         models_1.User.deleteMany({}),
         models_1.Team.deleteMany({}),
@@ -176,6 +172,6 @@ seedDatabase()
     process.exitCode = 1;
 })
     .finally(async () => {
-    await mongoose_1.default.disconnect();
+    await (0, database_1.disconnectFromDatabase)();
 });
 //# sourceMappingURL=seed.js.map
