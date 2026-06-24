@@ -1,0 +1,1 @@
+{"version":3,"file":"Team.d.ts","sourceRoot":"","sources":["../../src/models/Team.ts"],"names":[],"mappings":"AAEA,MAAM,WAAW,WAAW;IAC1B,IAAI,EAAE,MAAM,CAAC;IACb,IAAI,EAAE,MAAM,CAAC;IACb,MAAM,EAAE,MAAM,CAAC;IACf,WAAW,EAAE,MAAM,CAAC;IACpB,iBAAiB,EAAE,MAAM,CAAC;CAC3B;AAaD,eAAO,MAAM,IAAI;;;;;;oBAAyC,CAAC"}
