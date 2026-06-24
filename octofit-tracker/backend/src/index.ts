@@ -1,14 +1,22 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { apiBaseUrl } from './config/apiUrl';
+import { mongoUri } from './config/database';
+import { apiRouter } from './routes/api';
 
 const app = express();
 const port = Number(process.env.PORT) || 8000;
-const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 
 app.use(express.json());
+app.use('/api', apiRouter);
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'octofit-backend' });
+  res.json({ status: 'ok', service: 'octofit-backend', apiBaseUrl });
+});
+
+app.use((error: unknown, _request: express.Request, response: express.Response, _next: express.NextFunction) => {
+  console.error(error);
+  response.status(500).json({ error: 'Internal server error' });
 });
 
 const startServer = async (): Promise<void> => {
@@ -22,6 +30,7 @@ const startServer = async (): Promise<void> => {
 
   app.listen(port, () => {
     console.log(`Backend API running on port ${port}`);
+    console.log(`Backend API base URL: ${apiBaseUrl}`);
   });
 };
 
